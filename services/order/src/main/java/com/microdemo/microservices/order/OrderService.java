@@ -7,6 +7,8 @@ import com.microdemo.microservices.kafka.OrderConfirmation;
 import com.microdemo.microservices.kafka.OrderProducer;
 import com.microdemo.microservices.orderline.OrderLineRequest;
 import com.microdemo.microservices.orderline.OrderLineService;
+import com.microdemo.microservices.payment.PaymentClient;
+import com.microdemo.microservices.payment.PaymentRequest;
 import com.microdemo.microservices.product.ProductClient;
 import com.microdemo.microservices.product.PurchaseRequest;
 import com.microdemo.microservices.product.PurchaseResponse;
@@ -32,6 +34,8 @@ public class OrderService {
     private final OrderLineService orderLineService;
 
     private final OrderProducer orderProducer;
+
+    private final PaymentClient paymentClient;
 
 
     public Integer createOrder(OrderRequest request) {
@@ -59,7 +63,14 @@ public class OrderService {
         }
 
         //start payment process
-
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         //send the order confirmation --> notification-ms (kafka)
         orderProducer.sendOrderConfirmation(
