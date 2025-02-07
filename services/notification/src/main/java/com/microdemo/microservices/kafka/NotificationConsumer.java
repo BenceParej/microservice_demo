@@ -1,12 +1,11 @@
 package com.microdemo.microservices.kafka;
 
 
-import com.microdemo.microservices.kafka.email.EmailService;
+import com.microdemo.microservices.email.EmailService;
 import com.microdemo.microservices.kafka.order.OrderConfirmation;
 import com.microdemo.microservices.kafka.payment.PaymentConfirmation;
 import com.microdemo.microservices.notification.Notification;
 import com.microdemo.microservices.notification.NotificationRepository;
-import com.microdemo.microservices.notification.NotificationType;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

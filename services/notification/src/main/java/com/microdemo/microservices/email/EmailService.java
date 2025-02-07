@@ -1,5 +1,4 @@
-package com.microdemo.microservices.kafka.email;
-
+package com.microdemo.microservices.email;
 
 import com.microdemo.microservices.kafka.order.Product;
 import jakarta.mail.MessagingException;
@@ -105,6 +104,4 @@ public class EmailService {
             log.warn("WARNING - Cannot send email to {}", destinationEmail);
         }
     }
-
-
 }

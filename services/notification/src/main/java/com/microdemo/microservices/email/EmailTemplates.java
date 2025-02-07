@@ -1,4 +1,4 @@
-package com.microdemo.microservices.kafka.email;
+package com.microdemo.microservices.email;
 
 import lombok.Getter;
 
